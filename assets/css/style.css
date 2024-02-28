@@ -247,7 +247,7 @@ section{
    height: 100%; /* Make the logo fill the height of the header */
    width: auto;
    margin-right: auto; /* Push the logo to the middle */
-   margin-left: 200px; /* Push the logo to the middle */
+   margin-left: 150px; /* Push the logo to the middle */
 }
 
 
@@ -327,6 +327,14 @@ section{
    color:var(--light-white);
    padding:1rem 0;
    line-height: 1.5;
+}
+
+.textarea.form-control {
+   resize: vertical; /* Allow vertical resizing */
+}
+
+.td, .th {
+   text-align: center;
 }
 
 .products .box-container{

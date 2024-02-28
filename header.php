@@ -4,7 +4,12 @@
 
             </div>
 
-            <!-- <div class="user-box">
+            <!-- <div class="icons">
+                <div id="user-btn"class="fas fa-user"></div>
+                
+            </div>
+
+            <div class="user-box">
             <p>username : <span><?php echo $_SESSION['user_name']; ?></span></p>
             <p>email : <span><?php echo $_SESSION['user_email']; ?></span></p>
             <a href="logout.php" class="delete-btn">logout</a>

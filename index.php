@@ -120,22 +120,20 @@ if (isset($_POST['filter_all'])) {
 
     <style>
         .mx-auto {
-            width: 1000px;
-        }
-        .table-responsive {
-            overflow-x: auto;
+            width: 100%;
+            max-width: none;
+            margin: 0;
         }
 
         .costum-table {
-            width: auto;
+            width: 2500px;
+            table-layout: fixed;
         }
 
         .header {
-            background: rgb(5,90,113);
-            background: linear-gradient(90deg, rgba(5,90,113,1) 11%, rgba(1,143,167,1) 76%, rgba(0,162,186,1) 100%);
+            background: rgb(5, 90, 113);
+            background: linear-gradient(90deg, rgba(5, 90, 113, 1) 11%, rgba(1, 143, 167, 1) 76%, rgba(0, 162, 186, 1) 100%);
         }
-
-        
 
         .add-table-btn {
             position: fixed;
@@ -154,13 +152,50 @@ if (isset($_POST['filter_all'])) {
         .add-table-btn:hover {
             background-color: #0056b3;
         }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 20px; /* Adjust margin-top */
+        }
+
+        .table-container table {
+            font-size: 15px;
+        }
+
+        .table-container th,
+        .table-container td {
+            font-size: 15px;
+            text-align: center; /* Align all content inside table cells to the center */
+            padding: 10px; /* Add padding to table cells */
+        }
+
+        .table-container th {
+            background-color: #00AFF0;
+        }
+
+        .table-container tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .table-title {
+            text-align: center;
+            font-size: 24px; /* Adjust font size for the title */
+            margin-bottom: 20px; /* Adjust margin-bottom */
+            margin-top: 20px; /* Add margin-top */
+        }
     </style>
 
 </head>
 
 <body>
-<?php include 'header.php'; ?>
-    <div class="container-fluid">
+    <?php include 'header.php'; ?>
+
+    &nbsp;
+    &nbsp;
+
+    <div class="table-title">Monitoring Evaluasi Kepuasan Pelanggan</div> 
+    <div class="container-fluid table-container">
 
         &nbsp;
 
@@ -176,29 +211,29 @@ if (isset($_POST['filter_all'])) {
         &nbsp;
 
         <!-- untuk mengeluarkan data -->
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
+        <div>
+            <table class="table table-bordered costum-table">
+                <thead class="text-center">
                     <tr>
-                        <th rowspan="2">NO</th>
-                        <th rowspan="2">JENIS</th>
-                        <th colspan="4">DATA PESERTA</th>
-                        <th rowspan="2">JUDUL PEMBELAJARAN</th>
-                        <th rowspan="2">PIC PELATIHAN</th>
-                        <th rowspan="2">BATCH</th>
-                        <th rowspan="2">TANGGAL MULAI</th>
-                        <th rowspan="2">TANGGAL SELESAI</th>
-                        <th colspan="4">RERATA HASIL EVALUASI LEVEL 1</th>
-                        <th rowspan="2">SARAN/KRITIK</th>
-                        <th rowspan="2">ACTION PLAN</th>
-                        <th rowspan="2">PROGRESS ACTION PLAN</th>
-                        <th rowspan="2">PROSENTASE PROGRESS</th>
-                        <th rowspan="2">EVIDENCE TINDAK LANJUT</th>
-                        <th rowspan="2">STATUS</th>
-                        <th rowspan="2">EDIT</th>
+                        <th rowspan="2" style="width: 40px; text-align: center">NO</th>
+                        <th rowspan="2" style="width: 200px; text-align: center">JENIS</th>
+                        <th colspan="4" style="width: 700px; text-align: center">DATA PESERTA</th>
+                        <th rowspan="2" style="width: 350px; text-align: center">JUDUL PEMBELAJARAN</th>
+                        <th rowspan="2" style="width: 250px; text-align: center">PIC PELATIHAN</th>
+                        <th rowspan="2" style="width: 150px; text-align: center">BATCH</th>
+                        <th rowspan="2" style="width: 100px; text-align: center">TANGGAL MULAI</th>
+                        <th rowspan="2" style="width: 100px; text-align: center">TANGGAL SELESAI</th>
+                        <th colspan="4" style="width: 600px; text-align: center">RERATA HASIL EVALUASI LEVEL 1</th>
+                        <th rowspan="2" style="width: 450px; text-align: center">SARAN/KRITIK</th>
+                        <th rowspan="2" style="width: 450px; text-align: center">ACTION PLAN</th>
+                        <th rowspan="2" style="width: 450px; text-align: center">PROGRESS ACTION PLAN</th>
+                        <th rowspan="2" style="width: 200px; text-align: center">PROSENTASE PROGRESS</th>
+                        <th rowspan="2" style="width: 100px; text-align: center">EVIDENCE TINDAK LANJUT</th>
+                        <th rowspan="2" style="width: 170px; text-align: center">STATUS</th>
+                        <th rowspan="2" style="width: 100px; text-align: center">EDIT</th>
                     </tr>
                     <tr>
-                        <th colspan="1">NID</th>
+                        <th colspan="1" style="width: 150px">NID</th>
                         <th colspan="1">NAMA</th>
                         <th colspan="1">JABATAN</th>
                         <th colspan="1">UNIT</th>
@@ -239,34 +274,34 @@ if (isset($_POST['filter_all'])) {
                     $status = $r2['Status'];
                 ?>
                     <tr>
-                        <td><?php echo $urut++ ?></td>
-                        <td><?php echo $jenis ?></td>
-                        <td><?php echo $NID ?></td>
+                        <td style="width: 5%;"><?php echo $urut++ ?></td>
+                        <td style="width: 1000px"><?php echo $jenis ?></td>
+                        <td style="width: 5%;"><?php echo $NID ?></td>
                         <td><?php echo $name ?></td>
-                        <td><?php echo $jabatan ?></td>
-                        <td><?php echo $unit ?></td>
-                        <td><?php echo $judul_pembelajaran ?></td>
-                        <td><?php echo $pic ?></td>
-                        <td><?php echo $batch ?></td>
-                        <td><?php echo $t_Mulai ?></td>
-                        <td><?php echo $t_Selesai ?></td>
-                        <td><?php echo $instruktur ?></td>
-                        <td><?php echo $materi ?></td>
-                        <td><?php echo $peserta ?></td>
-                        <td><?php echo $penyelenggara ?></td>
-                        <td><?php echo $saran ?></td>
-                        <td><?php echo $action ?></td>
-                        <td><?php echo $progress ?></td>
-                        <td><?php echo $per_pro ?></td>
-                        <td>
+                        <td style="width: 5%;"><?php echo $jabatan ?></td>
+                        <td style="width: 5%;"><?php echo $unit ?></td>
+                        <td style="width: 5%;"><?php echo $judul_pembelajaran ?></td>
+                        <td style="width: 5%;"><?php echo $pic ?></td>
+                        <td style="width: 5%;"><?php echo $batch ?></td>
+                        <td style="width: 5%;"><?php echo $t_Mulai ?></td>
+                        <td style="width: 5%;"><?php echo $t_Selesai ?></td>
+                        <td style="width: 5%;"><?php echo $instruktur ?></td>
+                        <td style="width: 5%;"><?php echo $materi ?></td>
+                        <td style="width: 5%;"><?php echo $peserta ?></td>
+                        <td style="width: 5%;"><?php echo $penyelenggara ?></td>
+                        <td style="width: 5%;"><?php echo $saran ?></td>
+                        <td style="width: 5%;"><?php echo $action ?></td>
+                        <td style="width: 5%;"><?php echo $progress ?></td>
+                        <td style="width: 5%;"><?php echo $per_pro ?></td>
+                        <td style="width: 5%;">
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#evidenceModal<?php echo $id ?>">
                                 <i class="fas fa-eye"></i>
                             </button>
                         </td>
 
-                        <td><?php echo $status ?></td>
+                        <td style="width: 5%;"><?php echo $status ?></td>
                         
-                        <td>
+                        <td style="width: 5%;">
                             <a href="edit.php?id=<?php echo $id ?>" class="btn btn-warning edit-button">
                                 <i class="fas fa-pen"></i>
                             </a>

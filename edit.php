@@ -1,4 +1,30 @@
 <?php
+function uploadEvidenceFiles($files) {
+    $uploadDir = 'assets/uploaded_img/';
+    $uploadedFiles = [];
+
+    // Loop through each uploaded file
+    foreach ($files['evidence']['tmp_name'] as $key => $tmpName) {
+        $fileName = basename($files['evidence']['name'][$key]);
+        $uploadPath = $uploadDir . $fileName;
+
+        // Check if file already exists
+        if (file_exists($uploadPath)) {
+            // If file exists, append a timestamp to avoid overwriting
+            $timestamp = time();
+            $fileName = $timestamp . '_' . $fileName;
+            $uploadPath = $uploadDir . $fileName;
+        }
+
+        // Move the uploaded file to the destination directory
+        if (move_uploaded_file($tmpName, $uploadPath)) {
+            $uploadedFiles[] = $uploadPath;
+        }
+    }
+
+    return $uploadedFiles;
+}
+
 $host = "localhost";
 $username = "root";
 $password = "";
@@ -41,10 +67,19 @@ if (isset($_POST['update'])) {
     $action = $_POST['action'];
     $progress = $_POST['progress'];
     $per_pro = $_POST['per_pro'];
-    $evidence = $_POST['evidence'];
+    $evidence = $_FILES['evidence'];
     $status = $_POST['status'];
 
     if ($name && $jenis && $NID && $jabatan && $unit && $judul_pembelajaran && $pic && $batch && $t_Mulai && $t_Selesai && $instruktur && $materi && $peserta && $penyelenggara && $saran && $action && $progress && $per_pro && $evidence && $status) {
+        // Check if files are uploaded
+        if (!empty($_FILES['evidence']['name'][0])) {
+            // Call the uploadEvidenceFiles function to handle file upload
+            $uploadedFiles = uploadEvidenceFiles($_FILES['evidence']);
+
+            // Update the $evidence variable with the uploaded file paths
+            $evidence = implode(',', $uploadedFiles);
+        }
+
         $sql_update = "UPDATE master_table SET Nama = '$name', Jenis = '$jenis', NID = '$NID', Jabatan = '$jabatan', Unit = '$unit', Judul_pembelajaran = '$judul_pembelajaran', PIC_pelatihan = '$pic', Batch = '$batch', T_Mulai = '$t_Mulai', T_Selesai = '$t_Selesai', Instruktur = '$instruktur', Materi = '$materi', Peserta = '$peserta', Penyelenggara = '$penyelenggara', Saran = '$saran', Action = '$action', Progress = '$progress', Per_pro = '$per_pro', Evidence = '$evidence', Status = '$status' WHERE Id = '$id'";
         $result_update = mysqli_query($conn, $sql_update);
 
@@ -90,7 +125,7 @@ if (isset($_POST['update'])) {
             height: 100%; /* Make the logo fill the height of the header */
             width: auto;
             margin-right: auto; /* Push the logo to the middle */
-            margin-left: 200px; /* Push the logo to the middle */
+            margin-left: 150px; /* Push the logo to the middle */
         }
 
         .container-card {
@@ -152,7 +187,7 @@ if (isset($_POST['update'])) {
                     <?php echo $sukses; ?>
                 </div>
             <?php endif; ?>
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="jenis" class="form-label">Jenis</label>
                     <select class="form-select" id="jenis" name="jenis">
@@ -201,32 +236,32 @@ if (isset($_POST['update'])) {
                     <input type="date" class="form-control" id="t_Selesai" name="t_Selesai" value="<?php echo $row['T_Selesai']; ?>">
             </div>
             <div class="mb-3">
-                <label for="instruktur" class="form-label">Instruktur</label>
+                <label for="instruktur" class="form-label"> Rerata Hasil Instruktur</label>
                     <input type="text" class="form-control" id="instruktur" name="instruktur" value="<?php echo $row['Instruktur']; ?>">
             </div>
             <div class="mb-3">
-                <label for="materi" class="form-label">Materi</label>
+                <label for="materi" class="form-label">Rerata Hasil Materi</label>
                     <input type="text" class="form-control" id="materi" name="materi" value="<?php echo $row['Materi']; ?>">
             </div>
             <div class="mb-3">
-                <label for="peserta" class="form-label">Peserta</label>
+                <label for="peserta" class="form-label">Rerata HasilPeserta</label>
                     <input type="text" class="form-control" id="peserta" name="peserta" value="<?php echo $row['Peserta']; ?>">
             </div>
             <div class="mb-3">
-                <label for="penyelenggara" class="form-label">Penyelenggara</label>
+                <label for="penyelenggara" class="form-label">Rerata Hasil Penyelenggara</label>
                     <input type="text" class="form-control" id="penyelenggara" name="penyelenggara" value="<?php echo $row['Penyelenggara']; ?>">
             </div>
             <div class="mb-3">
                 <label for="saran" class="form-label">Saran/Kritik</label>
-                    <input type="text" class="form-control" id="saran" name="saran" value="<?php echo $row['Saran']; ?>">
+                    <textarea type="text" class="form-control" id="saran" name="saran" value="<?php echo $row['Saran']; ?>"></textarea>
             </div>
             <div class="mb-3">
                 <label for="action" class="form-label">Action Plan</label>
-                    <input type="text" class="form-control" id="action" name="action" value="<?php echo $row['Action']; ?>">
+                    <textarea type="text" class="form-control" id="action" name="action" value="<?php echo $row['Action']; ?>"></textarea>
             </div>
             <div class="mb-3">
                 <label for="progress" class="form-label">Progress Action Plan</label>
-                    <input type="text" class="form-control" id="progress" name="progress" value="<?php echo $row['Progress']; ?>">
+                    <textarea type="text" class="form-control" id="progress" name="progress" value="<?php echo $row['Progress']; ?>"></textarea>
             </div>
             <div class="mb-3">
                 <label for="per_pro" class="form-label">Prosentase Progress</label>

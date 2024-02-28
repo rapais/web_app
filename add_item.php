@@ -78,7 +78,7 @@ if (isset($_POST['add'])) {
         height: 100%; /* Make the logo fill the height of the header */
         width: auto;
         margin-right: auto; /* Push the logo to the middle */
-        margin-left: 200px; /* Push the logo to the middle */
+        margin-left: 150px; /* Push the logo to the middle */
         }
                 
         .container-card {
