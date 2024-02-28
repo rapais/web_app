@@ -17,14 +17,14 @@
       <div class="card login-card">
         <div class="row no-gutters">
           <div class="col-md-5">
-            <img src="assets/images/login.jpg" alt="login" class="login-card-img">
+            <img src="assets\images\loginpic.png" alt="login" class="login-card-img">
           </div>
           <div class="col-md-7">
             <div class="card-body">
               <div class="brand-wrapper">
-                <img src="assets/images/logo.png" alt="logo" class="logo">
+                <img src="assets\images\Logo_PLN_login.svg" alt="logo" class="logo">
               </div>
-              <p class="login-card-description">Sign into your account</p>
+              <p class="login-card-description">Sign in</p>
               <form method="post">
                   <div class="form-group">
                   <label for="email">Email</label>
